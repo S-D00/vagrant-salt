@@ -1,0 +1,1 @@
+java -jar /vagrant/jenkins-cli.jar -s http://192.168.73.14:80/ -auth admin:`sudo cat /var/lib/jenkins/secrets/initialAdminPassword` create-job World_Maven < /vagrant/jenkins_job.xml

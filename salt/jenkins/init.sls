@@ -1,13 +1,14 @@
 install_jenkins:
 
-    cmd.run:
-        - name: wget -q -O - https://pkg.jenkins.io/debian/jenkins.io.key | sudo apt-key add -
-    
     pkgrepo.managed:
         - name: deb http://pkg.jenkins.io/debian-stable binary/
+        - file: /etc/apt/sources.list.d/jenkins.list
+        - key_url: https://pkg.jenkins.io/debian/jenkins.io.key
+
         
     pkg.installed:
         - pkgs:
             - jenkins
 
-
+    cmd.run:
+        - name: sleep 1m

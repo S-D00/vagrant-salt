@@ -24,14 +24,14 @@ set_initial_setup_complete:
 
 restart_service_1:
     
-        cmd.run:
-            - name: systemctl restart jenkins
-            - runas: root
+    cmd.run:
+        - name: systemctl restart jenkins
+        - runas: root
 
-        service.running:
-            - name: jenkins
-            - enable: True
-            - reload: True
+    service.running:
+        - name: jenkins
+        - enable: True
+        - reload: True
 
 wait_2:
 
@@ -48,15 +48,15 @@ set_JNLP4:
 
 install_plugins:
 
-        cmd.run:
-            - name:
-                java -jar /var/cache/jenkins/war/WEB-INF/jenkins-cli.jar -auth admin:`cat /var/lib/jenkins/secrets/initialAdminPassword` -s http://localhost:80/ install-plugin maven-plugin deploy git github -restart
-            - runas: root
+    cmd.run:
+        - name:
+            java -jar /var/cache/jenkins/war/WEB-INF/jenkins-cli.jar -auth admin:`cat /var/lib/jenkins/secrets/initialAdminPassword` -s http://localhost:80/ install-plugin maven-plugin deploy git github -restart
+        - runas: root
 
-        service.running:
-            - name: jenkins
-            - enable: True
-            - reload: True
+    service.running:
+        - name: jenkins
+        - enable: True
+        - reload: True
 
 restart_service_2:
 
@@ -72,7 +72,8 @@ restart_service_2:
 set_maven_home:
 
         cmd.run:
-            - name:
+            - name: |
+                sleep 1m
                 echo "import jenkins.model.*; import hudson.util.*; import jenkins.install.*; a=Jenkins.instance.getExtensionList(hudson.tasks.Maven.DescriptorImpl.class)[0]; b=(a.installations as List); b.add(new hudson.tasks.Maven.MavenInstallation('Maven','/usr/share/maven',[])); a.installations=b; a.save()" | java -jar /var/cache/jenkins/war/WEB-INF/jenkins-cli.jar -auth admin:`cat /var/lib/jenkins/secrets/initialAdminPassword` -s http://localhost:80/ groovy =
             - runas: root
 

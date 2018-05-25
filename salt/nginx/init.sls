@@ -15,3 +15,8 @@ install_nginx:
         - name: nginx
         - enable: True
         - reload: True
+
+install_apache_utils:
+
+    pkg.installed:
+        - name: apache2-utils

@@ -26,6 +26,8 @@ Vagrant.configure("2") do |config|
 
     elk.vm.hostname = "elk"
 
+    elk.vm.provision:shell, path:"salt_minion.sh"
+
   end
 
   config.vm.define "salt", primary: true do |salt|

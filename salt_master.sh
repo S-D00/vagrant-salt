@@ -7,3 +7,5 @@ sudo printf 'file_roots:\n  base:\n    - /srv/salt' >> /etc/salt/master
 sleep 1m
 
 sudo salt-key -A -y
+
+sleep 1m

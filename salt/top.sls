@@ -3,6 +3,7 @@ base:
     - java.init
     - git.init
     - nginx.init
+    - elk.beats
     
   'salt':
     - maven.init
@@ -15,3 +16,7 @@ base:
     - tomcat.init
     - tomcat.permissions
     - nginx.nginx_minion
+
+  'elk':
+    - elk.init
+    - elk.nginx_elk
